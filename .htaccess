@@ -1,0 +1,7 @@
+Options -Indexes
+AddType application/octet-stream .bin
+AddType application/json .json
+
+<FilesMatch "\.(sqlite|sqlite-wal|sqlite-shm|db)$">
+    Require all denied
+</FilesMatch>
