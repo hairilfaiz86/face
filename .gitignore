@@ -5,3 +5,6 @@ data/*.sqlite-shm
 
 # Fail ZIP untuk deploy
 dist/*.zip
+
+# Tetapan alat pembangunan (Claude Code) — bukan sebahagian sistem
+.claude/
