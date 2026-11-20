@@ -33,6 +33,24 @@ $kelas = senarai_kelas();
       </div>
     </div>
 
+    <div class="rounded-xl border border-biru-100 bg-biru-50/60 p-4 text-sm text-slate-600">
+      <p class="flex items-center gap-2 font-semibold text-biru-900">
+        <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3z"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>
+        Perlindungan Data Peribadi
+      </p>
+      <p class="mt-1.5 leading-relaxed">Data wajah ialah data peribadi yang sensitif. Sistem ini mengendalikannya selaras dengan prinsip <b>Akta Perlindungan Data Peribadi 2010 (Akta 709)</b>:</p>
+      <ul class="mt-2 space-y-1 list-disc list-inside marker:text-biru-500">
+        <li><b>Gambar tidak disimpan.</b> Hanya ciri wajah dalam bentuk nombor (embedding) direkodkan.</li>
+        <li>Digunakan <b>untuk merekod kehadiran sahaja</b>, bukan untuk tujuan lain.</li>
+        <li>Disimpan di pelayan sekolah dan <b>tidak dikongsi</b> dengan pihak ketiga.</li>
+        <li>Data dipadam sepenuhnya apabila rekod pelajar dihapuskan, contohnya apabila pelajar berpindah.</li>
+      </ul>
+      <label class="mt-3 flex items-start gap-2.5 cursor-pointer rounded-lg bg-white p-3 ring-1 ring-slate-200 hover:ring-biru-200">
+        <input type="checkbox" name="persetujuan" id="persetujuan" required class="mt-0.5 w-4 h-4 accent-biru-700 shrink-0">
+        <span class="text-slate-700">Saya mengesahkan bahawa <b>persetujuan ibu bapa/penjaga</b> telah diperoleh untuk mendaftarkan data wajah pelajar ini.</span>
+      </label>
+    </div>
+
     <div id="mesej" class="hidden text-sm rounded-xl px-4 py-3"></div>
 
     <div class="flex gap-3 pt-2">
@@ -108,10 +126,12 @@ $('borang').onsubmit = async (e) => {
   try {
     const r = await Wajah.post('api.php?t=daftar', {
       nama: f.get('nama'), no_murid: f.get('no_murid'), kelas: f.get('kelas'), sampel,
+      persetujuan: $('persetujuan').checked,
     });
     if (r.ok) {
       mesej(r.mesej, 'ok');
       e.target.nama.value = ''; e.target.no_murid.value = '';
+      $('persetujuan').checked = false;
       sampel = [];
       e.target.nama.focus();
     } else mesej(r.mesej || 'Gagal menyimpan.', 'ralat');

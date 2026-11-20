@@ -77,6 +77,7 @@ try {
             $sampel = $input['sampel'] ?? [];
             if ($nama === '' || $kelas === '') balas(['ok' => false, 'mesej' => 'Nama dan kelas wajib diisi.'], 400);
             if (!is_array($sampel) || count($sampel) < 1) balas(['ok' => false, 'mesej' => 'Tiada sampel wajah.'], 400);
+            if (empty($input['persetujuan'])) balas(['ok' => false, 'mesej' => 'Sila sahkan persetujuan ibu bapa/penjaga terlebih dahulu.'], 400);
 
             $bersih = [];
             foreach ($sampel as $s) {

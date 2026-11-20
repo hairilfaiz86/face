@@ -3,3 +3,5 @@
 Dockerfile
 .dockerignore
 data/*.sqlite*
+dist
+*.zip

@@ -1,0 +1,7 @@
+# Pangkalan data (mengandungi data wajah pelajar — jangan masukkan ke Git)
+data/*.sqlite
+data/*.sqlite-wal
+data/*.sqlite-shm
+
+# Fail ZIP untuk deploy
+dist/*.zip
